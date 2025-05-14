@@ -1,0 +1,300 @@
+//オブジェクト
+//確認
+//1 次のコードで何が表示されるでしょう。結果を考えたら、実行してみましょう。
+const place = "Zoom";
+const lesson = {
+  students: ["田中", "川西", "大村"],
+  coding: true,
+  place: "Zoom",
+};
+console.log(lesson["place"]); // ???
+console.log(lesson.place); // ???
+console.log(lesson[place]); // ???
+console.log(lesson["cod" + "ing"]); // ???
+console.log(lesson[2]); // ???
+console.log(lesson.students[2]); // ???
+console.log(lesson.length); // ???
+console.log(lesson.students.length); // ???
+console.log(typeof lesson.students); // ???
+
+//2 次のコードを実行すると何が出力されるでしょう。結果を考えたら、実行してみましょう。
+const object = {
+  a: "おはよう",
+  b: "おやすみ",
+  c: 1000,
+};
+
+console.log(object["a"]); // ???
+console.log(object.b); // ???
+object["b"] = "ありがとう";
+console.log(object["b"]); // ???
+
+// これは少し難しい！ 😉
+console.log(object[a]); // ???
+
+//3配列の中に配列を入れ子にできたのと同様に、配列とオブジェクトを入れ子にすることもできます。次のコードがどんな構造になっているか、パートナーと話してみましょう。
+const pokemons = [
+  {
+    Number: "001",
+    Name: "フシギダネ",
+    Generation: "第一世代",
+    About:
+      "生後しばらくは種から養分を得て成長する。背中の種から養分を受け取ることで、何日も何も食べなくても平気。",
+    Types: ["くさ", "どく"],
+  },
+  {
+    Number: "025",
+    Name: "ピカチュウ",
+    Generation: "第一世代",
+    About: "静電気を体にまとい触った相手をまひさせることがある。",
+    Types: ["でんき"],
+  },
+  {
+    Number: "019",
+    Name: "コラッタ",
+    Generation: "第一世代",
+    About: "どんな場所でも住み着いていける生命力。警戒心がとても強い。",
+    Types: ["ノーマル"],
+  },
+];
+
+console.log(pokemons[0]); // ???
+console.log(pokemons[1].Name); // ???
+console.log(pokemons[0]["Name"]); // ???
+console.log(pokemons[2]["About"]); // ???
+console.log(pokemons[2].Types[0]); // ???
+
+//テスト構文
+function test(actual, expected) {
+   if (JSON.stringify(actual) === JSON.stringify(expected)) {
+      console.log("OK! Test PASSED.");
+   } else {
+      console.error("Test FAILED. Try again!");
+      console.log("    actual: ", actual);
+      console.log("  expected: ", expected);
+      console.trace();
+   }
+}
+
+//基礎
+//1 myInfo というオブジェクトを作成し、name, age, location, isProgrammer というキーを追加してください。isProgrammer の値を true に設定し、それ以外の値に自分自身の情報を入れてください。
+// ここにコードを書きましょう。
+
+// この演習では TDD スタイルのテストの代わりに console.log を使用してあなたが入力した情報を表示してみましょう。
+console.log(myInfo["isProgrammer"]); // => "true"
+
+//2 ドットとダッシュの連続で情報を伝えるモールス信号（morse code）は、電話が登場する以前に、電気通信の手段に広く使われていました。
+//表は "t", "a", "r"という三文字に対応するモールス信号を示しています。この情報を元に、下のテストに通る "morseCode" というオブジェクトを作ってください。
+  // ここにコードを書きましょう.
+
+test(morseCode["t"], "-");
+test(morseCode["a"], ".-");
+test(morseCode["r"], ".-.");
+
+//3 /**
+ * @param {string}  モールス信号に変換する文字
+ * @returns {string} 与えられた文字に対応するモールス信号
+ */
+function morseCodeArt() {
+  // ここにコードを書きましょう.
+}
+
+test(morseCodeArt("a"), ".-");
+test(morseCodeArt("r"), ".-.");
+test(morseCodeArt("t"), "-");
+test(morseCodeArt("art"), ".- .-. -");
+
+//4 関数 select を宣言してください。
+//アドバイス : 最近学んだあるパターンが使えるかもしれません。
+/**
+ * @param {object}  オブジェクト
+ * @param {Array<string>}  文字列の入った配列
+ * @returns {object} 与えられた配列の要素をキーにして、それに対応する値を第 1 引数のオブジェクトから選んで作った新しいオブジェクト
+ */
+
+// ここにコードを書きましょう.
+
+test(select({ a: 1, b: 2, c: 3 }, ["a"]), { a: 1 });
+test(select({ a: 1, b: 2, c: 3 }, ["a", "c"]), { a: 1, c: 3 });
+test(select({ a: 1, b: 2, c: 3 }, ["a", "b", "c"]), { a: 1, b: 2, c: 3 });
+test(select({ a: 1, b: 2, c: 3 }, []), {});
+
+//5 関数 countCharacters を宣言してください
+/**
+ * @param {string} ???
+ * @returns {{ [character: string]: number }} 与えられた文字列の中の各文字をキーに、その登場回数を値にしたオブジェクト
+ */
+
+// ここにコードを書きましょう.
+
+test(countCharacters("hello"), { h: 1, e: 1, l: 2, o: 1 });
+test(countCharacters("hello hello"), { h: 2, e: 2, l: 4, o: 2, " ": 1 });
+
+
+//中級
+//1 関数 countWords を宣言してください。
+//アドバイス : 文字列型のメソッド .split が役に立ちます。
+
+/**
+ * @param {string}
+ * @returns {{ [word: string]: number }} 与えられた文字列の中の各単語をキーとして持つオブジェクト。各キーに対応する値は、それぞれの単語が文字列の中で使われている回数。
+ */
+
+// ここにコードを書きましょう.
+
+test(countWords("hello hello"), { hello: 2 });
+test(countWords("hello Hello"), { hello: 1, Hello: 1 });
+test(countWords("おはよう おはよう こんばんは"), {おはよう: 2, こんばんは: 1})
+test(countWords(""), {});
+
+//ポケモンタイム
+//次の演習では、確認演習 3 で使用した pokemons 配列を使ってください。
+//1 関数 getNames を宣言してください。
+/**
+ * @param {Array<object>}  ポケモンオブジェクトが入った配列
+ * @returns {Array<string>} 各オブジェクトの `Names` を要素に持つ配列
+ */
+
+// ここにコードを書きましょう.
+
+// 'pokemons' の配列は、以下のコードより上に書かれていなければいけません。
+
+test(getNames(pokemons), ["フシギダネ", "ピカチュウ", "コラッタ"]);
+
+//2 関数 findPokemon を宣言してください。
+//アドバイス 1 : 今回は == を使うべき数少ないチャンスです。
+//アドバイス 2 : 確認演習 3 で使用した配列には ポケモンオブジェクトが 3 つしかないため、
+//第 2 引数で渡す number はこの 3 つのオブジェクトの number である 1、25、19 を使ったときしかオブジェクトが返ってきません。
+/**
+ * @param {Array<object>}  ポケモンが入った配列
+ * @param {number}  取り出したいポケモンの 'number'
+ * @returns {object|null} 与えられた数字を 'number' に持つポケモン。もし対応するポケモンが存在しなければ、データがないことを示すデータ、null を返すようにしましょう。
+ */
+
+// ここにコードを書きましょう.
+
+test(findPokemon(pokemons, 1), pokemons[0]);
+test(findPokemon(pokemons, 19), pokemons[2]);
+test(findPokemon(pokemons, 25), pokemons[1]);
+test(findPokemon(pokemons, 1337), null);
+
+//応用
+//1 関数 removeOddValues を宣言してください。
+//アドバイス : typeof を使う必要があるかもしれません。
+/**
+ * @param {object}  オブジェクト
+ * @returns {object} 与えられたオブジェクトのキーと値のペアのうち、値が奇数のものを除いた新たなオブジェクト。
+ */
+
+// ここにコードを書きましょう.
+
+test(removeOddValues({ a: 1, b: 2, c: 3 }), { b: 2 });
+test(removeOddValues({ a: "1", b: "2", c: "3" }), {
+  a: "1",
+  b: "2",
+  c: "3",
+});
+
+// オブジェクトを書くとき、1 行で書くと横に長くなってしまう場合はキーと値のペアを改行して書くこともできます。
+
+//セントレアから愛知芸術文化センターに移動!!!
+//以下は、中部国際空港から愛知芸術文化センターへのルート情報が含まれている routesという配列です。
+const routes = [
+  { route: "タクシー", time: { taxi: 74}, cost: 15720},
+  { route: "ミュースカイ＋名古屋＋地下鉄", time: { kintetsu: 29, transit: 7, subway: 5, walk: 6 }, cost: 1460 },
+  { route: "ミュースカイ＋金山＋バス", time: { kintetsu: 24, transit: 17, bus: 24, walk: 3 }, cost: 1400 },
+  { route: "ミュースカイ＋金山＋地下鉄", time: { kintetsu: 24, transit: 6, subway: 8, walk: 6 }, cost: 1400 },
+  { route: "ミュースカイ＋神宮前＋バス", time: { kintetsu: 21, transit: 10, bus: 30, walk: 3 }, cost: 1330 },
+  { route: "特急＋金山＋地下鉄", time: { kintetsu: 32, transit: 5, subway: 8, walk: 6 }, cost: 1030 },
+];
+//1 関数 longestTime を宣言してください。
+/**
+ * @param {Array<object>}  ルートの入った配列
+ * @returns {object} 所要時間が一番長いルートのオブジェクト
+ */
+
+// ここにコードを書きましょう.
+
+test(longestTime(routes), routes[0]);
+test(longestTime(routes.slice(3)), routes[4]);
+test(longestTime(), undefined);
+
+//2 getSortedByCost を宣言してください。
+/**
+ * @param {Array<object>}  ルートの入った配列 `routes`
+ * @returns {Array<object>} 与えられたすべてのルートオブジェクトをコストの安い順に並び替えた新たな配列。同じコストの場合は、元の順番のままにする。
+ */
+
+// ここにコードを書きましょう.
+
+// routes のコピーを作りましょう。 (後でテストに使います。)
+const routesCopy = JSON.stringify(routes);
+
+const routesByCost = [
+ { route: "特急＋金山＋地下鉄", time: { kintetsu: 32, transit: 5, subway: 8, walk: 6 }, cost: 1030 },
+ { route: "ミュースカイ＋神宮前＋バス", time: { kintetsu: 21, transit: 10, bus: 30, walk: 3 }, cost: 1330 },
+ { route: "ミュースカイ＋金山＋バス", time: { kintetsu: 24, transit: 17, bus: 24, walk: 3 }, cost: 1400 },
+ { route: "ミュースカイ＋金山＋地下鉄", time: { kintetsu: 24, transit: 6, subway: 8, walk: 6 }, cost: 1400 },
+ { route: "ミュースカイ＋名古屋＋地下鉄", time: { kintetsu: 29, transit: 7, subway: 5, walk: 6 }, cost: 1460 },
+ { route: "タクシー", time: { taxi: 74}, cost: 15720},
+];
+
+test(getSortedByCost(routes), routesByCost);
+
+// 関数を使う前にとったコピーと比較して、元の配列が変更されていないことを確認する。
+test(JSON.stringify(routes), routesCopy);
+
+//スコープ
+function test(actual, expected) {
+  if (JSON.stringify(actual) === JSON.stringify(expected)) {
+    console.log("OK! Test PASSED.");
+  } else {
+    console.error("Test FAILED. Try again!");
+    console.group("Result:");
+    console.log("  actual:", actual);
+    console.log("expected:", expected);
+    console.trace();
+    console.groupEnd();
+  }
+}
+
+//基礎
+//1 このコードを実行すると、コンソールに何が表示されるでしょうか？
+// 結果がどうなるか考えたら、コードを実行して答え合わせをしてみましょう。
+// 講義スライドを見返してローカルスコープとグローバルスコープの違いを確認し、なぜこのような挙動になるのかをしっかりと理解しましょう。
+let word = "こんにちは！";
+
+function greet(name) {
+  let word = "おはよう！";
+  return name + "さん、" + word;
+}
+
+console.log(greet("りか"));
+
+//2 この関数がテストに通るようにコードを修正しましょう。各変数の スコープ がどうなっているかを意識してください。
+let sum = 0;
+
+function sumArray(arrayOfNumbers) {
+  for (const number of arrayOfNumbers) {
+    sum += number;
+  }
+}
+
+test(sumArray([1, 2, 3]), 6);
+test(sumArray([10, 20, 30]), 60);
+test(sumArray([100, 200, 300]), 600);
+
+//中級
+//1 カウンターの機能を持った関数 counter が壊れてしまいました！ カウントアップ するよう、コードを修正してください。
+// アドバイス: 修正箇所はたった 1 行だけです。新しいコードを追加する必要はありません。
+
+let count = 0;
+
+function counter(x) {
+  let count = count + x;
+  return count;
+}
+
+test(counter(3), 3);
+test(counter(4), 7);
+test(counter(5), 12);
